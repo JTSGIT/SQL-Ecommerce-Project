@@ -14,32 +14,33 @@ QA Process:
 Describe your QA process and include the SQL queries used to execute it.
 
 Handling Missing Data:
-
+```sql
 SELECT COUNT(*) 
 FROM public.all_sessions 
 WHERE city IS NULL OR city = '' OR city = '(not set)';
-
+```
 Checking for Duplicate Data:
-
+```sql
 SELECT "visitId", COUNT(*) 
 FROM public.all_sessions 
 GROUP BY "visitId" 
 HAVING COUNT(*) > 1;
-
+```
 Data Type Validation:
-
+```sql
 SELECT "productPrice" 
 FROM public.all_sessions 
 WHERE "productPrice" !~ E'^\\d+$' LIMIT 10;
-
+```
 Data Consistency:
-
+```sql
 SELECT DISTINCT "v2ProductName" 
 FROM public.all_sessions 
 WHERE LOWER("v2ProductName") = 'product a';
-
+```
 Identify Outliers:
-
+```sql
 SELECT "timeOnSite" 
 FROM public.all_sessions 
 ORDER BY "timeOnSite" DESC LIMIT 5;
+```
