@@ -5,12 +5,14 @@ Answer the following questions and provide the SQL queries used to find the answ
 
 
 SQL Queries:
+```sql
 SELECT city, country, SUM("totalTransactionRevenue") as total_revenue
 FROM public.all_sessions
 WHERE "totalTransactionRevenue" IS NOT NULL
 GROUP BY city, country
 ORDER BY total_revenue DESC
 LIMIT 10;
+```
 
 Answer:
 not available in demo dataset,United States,6092560000
@@ -31,12 +33,13 @@ Chicago,United States,449520000
 
 
 SQL Queries:
+```sql
 SELECT city, country, AVG(CAST("productQuantity" AS FLOAT)) as average_ordered
 FROM public.all_sessions
 WHERE "productQuantity" IS NOT NULL AND "productQuantity" <> ''
 GROUP BY city, country
 ORDER BY average_ordered DESC;
-
+```
 
 
 
@@ -77,14 +80,14 @@ Ann Arbor,United States,1
 
 
 SQL Queries:
+```sql
 SELECT city, country, "v2ProductCategory", COUNT("v2ProductCategory") as category_count
 FROM public.all_sessions
 WHERE city <> '(not set)' AND country <> '(not set)'
 GROUP BY city, country, "v2ProductCategory"
 ORDER BY city, country, category_count DESC
 LIMIT 10;
-
-
+```
 
 Answer:
 Adelaide,Australia,Home/Apparel/Men's/Men's-Outerwear/,1
@@ -106,13 +109,13 @@ Alexandria,Egypt,Home/Apparel/Men's/Men's-T-Shirts/,1
 
 
 SQL Queries:
-
+```sql
 SELECT city, country, "v2ProductName", COUNT("v2ProductName") as product_count
 FROM public.all_sessions
 GROUP BY city, country, "v2ProductName"
 ORDER BY product_count DESC
 LIMIT 10;
-
+```
 
 
 Answer:
@@ -134,10 +137,12 @@ not available in demo dataset,United States,Galaxy Screen Cleaning Cloth,42
 **Question 5: Can we summarize the impact of revenue generated from each city/country?**
 
 SQL Queries:
+```sql
 SELECT city, country, SUM("totalTransactionRevenue")::FLOAT as total_revenue
 FROM public.all_sessions
 GROUP BY city, country
 ORDER BY total_revenue DESC;
+```
 
 Answer:
 
